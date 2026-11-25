@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivian Sophie's Community | 5-Month Reading Challenge & Author Feature Pages</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.65;
+            color: #1f2937;
+            background-color: #f9fafb;
+        }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navigation */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+        }
+        .logo {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: #d97706; }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-links a {
+            font-weight: 600;
+            color: #4b5563;
+            padding: 8px 4px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #1e3a8a;
+            border-bottom-color: #d97706;
+        }
+        .nav-btn {
+            background-color: #d97706;
+            color: #ffffff !important;
+            padding: 10px 18px !important;
+            border-radius: 6px;
+            border-bottom: none !important;
+        }
+        .nav-btn:hover { background-color: #b45309; }
+
+        /* Page Switching Logic */
+        .page-view { display: none; }
+        .page-view.active-page { display: block; }
+
+        /* Hero Section (Home) */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+            color: #ffffff;
+            padding: 90px 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.65rem;
+            line-height: 1.2;
+            max-width: 840px;
+            margin: 0 auto 20px;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: #dbeafe;
+            max-width: 690px;
+            margin: 0 auto 35px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            display: inline-block;
+            background-color: #d97706;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-primary:hover { background-color: #b45309; }
+        .btn-secondary {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.12);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            padding: 13px 28px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            text-align: center;
+        }
+        .btn-secondary:hover { background-color: rgba(255, 255, 255, 0.22); }
+
+        /* Section General */
+        section { padding: 70px 0; }
+        .section-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 45px;
+        }
+        .section-header h2 {
+            font-size: 2.1rem;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+        .section-header p {
+            color: #4b5563;
+            font-size: 1.05rem;
+        }
+        .badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        /* 5-Month Reading Challenge Banner on Home */
+        .challenge-banner-section { padding-bottom: 10px; }
+        .challenge-banner {
+            background: #ffffff;
+            border: 2px solid #1e3a8a;
+            border-radius: 12px;
+            padding: 42px;
+            display: grid;
+            grid-template-columns: 1.65fr 1fr;
+            gap: 35px;
+            align-items: center;
+            box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.08);
+        }
+        .challenge-banner h2 {
+            font-size: 1.95rem;
+            color: #111827;
+            margin-bottom: 12px;
+            line-height: 1.25;
+        }
+        .challenge-banner p {
+            color: #374151;
+            font-size: 1.05rem;
+            margin-bottom: 18px;
+        }
+        .challenge-highlights { list-style: none; }
+        .challenge-highlights li {
+            padding: 5px 0;
+            font-weight: 500;
+            color: #1f2937;
+        }
+        .challenge-highlights li::before {
+            content: "✓ ";
+            color: #d97706;
+            font-weight: 800;
+        }
+        .challenge-side-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 28px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .challenge-side-box h3 {
+            font-size: 1.3rem;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+        .challenge-side-box p {
+            font-size: 0.94rem;
+            color: #4b5563;
+            margin-bottom: 20px;
+        }
+
+        /* Goodreads Librarians Group Section */
+        .gr-box {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 45px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .gr-intro {
+            margin-bottom: 35px;
+            border-bottom: 1px solid #f3f4f6;
+            padding-bottom: 25px;
+        }
+        .gr-intro h3 {
+            font-size: 1.75rem;
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+        .gr-intro p {
+            color: #374151;
+            font-size: 1.05rem;
+        }
+        .importance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+        .imp-card {
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 4px solid #1e3a8a;
+        }
+        .imp-card h4 {
+            font-size: 1.15rem;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        .imp-card p {
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+        .gr-link-bar {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gr-link-bar p {
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 1.05rem;
+        }
+
+        /* Author Feature Page Offer */
+        .offer-section {
+            background-color: #ffffff;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .offer-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 2px solid #d97706;
+            border-radius: 12px;
+            padding: 45px;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+        .offer-card h2 {
+            font-size: 1.95rem;
+            color: #111827;
+            margin-bottom: 14px;
+            line-height: 1.25;
+        }
+        .offer-card p {
+            color: #374151;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+        .offer-list { list-style: none; }
+        .offer-list li {
+            padding: 6px 0;
+            font-weight: 500;
+            color: #1f2937;
+        }
+        .offer-list li::before {
+            content: "✓ ";
+            color: #d97706;
+            font-weight: 800;
+        }
+        .offer-cta-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .offer-cta-box h3 {
+            font-size: 1.35rem;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        .offer-cta-box p {
+            font-size: 0.95rem;
+            color: #4b5563;
+            margin-bottom: 20px;
+        }
+
+        /* Shared Subpage Header (About Me, Price List & Contact) */
+        .page-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+            color: #ffffff;
+            padding: 70px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+        .page-header p {
+            font-size: 1.1rem;
+            color: #dbeafe;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* About Me Page Styles */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 35px;
+            align-items: start;
+        }
+        .about-main-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .about-main-card h2 {
+            font-size: 1.8rem;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+        .about-main-card p {
+            color: #374151;
+            font-size: 1.03rem;
+            margin-bottom: 18px;
+        }
+        .about-pillars {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .pillar-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-left: 4px solid #d97706;
+            border-radius: 10px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .pillar-card h3 {
+            font-size: 1.15rem;
+            color: #1e3a8a;
+            margin-bottom: 6px;
+        }
+        .pillar-card p {
+            font-size: 0.94rem;
+            color: #4b5563;
+        }
+
+        /* Price List Page Styles */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 28px;
+        }
+        .price-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 34px 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        .price-card.featured-tier {
+            border: 2px solid #d97706;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.15);
+        }
+        .tier-badge {
+            position: absolute;
+            top: -13px;
+            right: 20px;
+            background: #d97706;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .month-label {
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #1e3a8a;
+            margin-bottom: 6px;
+        }
+        .price-amount {
+            font-size: 2.35rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+        .price-amount span {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #6b7280;
+        }
+        .importance-box {
+            background: #f8fafc;
+            border-left: 3px solid #d97706;
+            padding: 14px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .importance-box strong {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #b45309;
+            margin-bottom: 4px;
+        }
+        .importance-box p {
+            font-size: 0.93rem;
+            color: #374151;
+            line-height: 1.5;
+        }
+        .price-features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .price-features li {
+            padding: 7px 0;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 0.94rem;
+            color: #374151;
+        }
+        .price-features li:last-child { border-bottom: none; }
+        .price-features li::before {
+            content: "✓ ";
+            color: #1e3a8a;
+            font-weight: 800;
+        }
+        .price-features li.highlight-feature {
+            font-weight: 700;
+            color: #b45309;
+        }
+        .btn-outline {
+            display: block;
+            text-align: center;
+            padding: 13px;
+            border: 2px solid #1e3a8a;
+            color: #1e3a8a;
+            font-weight: 700;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            background: #1e3a8a;
+            color: #ffffff;
+        }
+
+        /* Contact Page Styles */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .info-card, .form-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .info-card h2, .form-card h2 {
+            font-size: 1.55rem;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+        .info-card p, .form-card p.sub {
+            color: #4b5563;
+            font-size: 0.96rem;
+            margin-bottom: 24px;
+        }
+        .detail-item {
+            margin-bottom: 20px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .detail-item strong {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #d97706;
+            margin-bottom: 4px;
+        }
+        .detail-item span, .detail-item a {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+        .detail-item a:hover { text-decoration: underline; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: #1f2937;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        #form-status {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 6px;
+            background-color: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: #9ca3af;
+            text-align: center;
+            padding: 35px 0;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: #fbbf24;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .challenge-banner, .offer-card, .contact-grid, .about-grid { grid-template-columns: 1fr; }
+            .gr-box, .offer-card, .challenge-banner, .about-main-card { padding: 28px; }
+            .hero h1, .page-header h1 { font-size: 2rem; }
+            .nav-links { gap: 10px; font-size: 0.88rem; }
+            .nav-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Shared Navigation Bar -->
+    <header>
+        <div class="container nav-flex">
+            <a onclick="showPage('home')" class="logo">Vivian Sophie's <span>Community</span></a>
+            <nav class="nav-links">
+                <a id="nav-home" onclick="showPage('home')" class="active">Home</a>
+                <a id="nav-about" onclick="showPage('about')">About Me</a>
+                <a id="nav-pricing" onclick="showPage('pricing')">Price List</a>
+                <a id="nav-contact" onclick="showPage('contact')">Contact</a>
+                <a href="https://www.goodreads.com/group/show/220-goodreads-librarians-group" target="_blank" rel="noopener noreferrer" class="nav-btn">Visit Goodreads Group</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- PAGE 1: HOME PAGE                          -->
+    <!-- ========================================== -->
+    <div id="home-page" class="page-view active-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Helping Authors Shine & Connecting Books With Readers</h1>
+                <p>Welcome to Vivian Sophie's Community. Join our 5-Month Reading Challenge (with a custom Author Feature Page included in every month), explore the Goodreads Librarians Group, and put your book in front of passionate readers.</p>
+                <div class="btn-group">
+                    <a onclick="showPage('pricing')" class="btn-primary">Join Our 5-Month Reading Challenge →</a>
+                    <a href="https://www.goodreads.com/group/show/220-goodreads-librarians-group" target="_blank" rel="noopener noreferrer" class="btn-secondary">Visit Goodreads Librarians Group</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5-Month Reading Challenge Announcement on Home Page -->
+        <section class="challenge-banner-section">
+            <div class="container">
+                <div class="challenge-banner">
+                    <div>
+                        <span class="badge">Now Open for Authors & Readers</span>
+                        <h2>We Are Hosting a 5-Month Reading Challenge!</h2>
+                        <p>At <strong>Vivian Sophie's Community</strong>, we are running a special <strong>5-Month Reading Challenge</strong> designed to keep your book in front of enthusiastic readers month after month—and <strong>every single month includes a custom Author Feature Page</strong> built for your book.</p>
+                        <ul class="challenge-highlights">
+                            <li>5 structured monthly tiers from Month 1 ($200) to Month 5 ($3,200)</li>
+                            <li>Custom Author Feature Page included with every monthly tier</li>
+                            <li>Sustained reader visibility, TBR placements, and community discussions</li>
+                        </ul>
+                    </div>
+                    <div class="challenge-side-box">
+                        <h3>5-Month Challenge Tiers</h3>
+                        <p>Explore the full price list, see what each month includes, and read why every tier matters.</p>
+                        <a onclick="showPage('pricing')" class="btn-primary" style="width:100%;">View Full Price List →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Goodreads Librarians Group Section -->
+        <section id="librarians-group">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About the Goodreads Librarians Group</h2>
+                    <p>Understanding how accurate book cataloging and community librarians protect your book's visibility on the world's largest reader platform.</p>
+                </div>
+
+                <div class="gr-box">
+                    <div class="gr-intro">
+                        <span class="badge">Essential Author Resource</span>
+                        <h3>What Is the Goodreads Librarians Group?</h3>
+                        <p>The <strong>Goodreads Librarians Group</strong> is a dedicated community of experienced, volunteer book catalogers who maintain and organize book records across Goodreads. Because Goodreads relies on clean metadata to recommend titles and group reviews together, this community acts as the backbone of book accuracy on the platform.</p>
+                    </div>
+
+                    <h3 style="font-size:1.35rem; color:#111827; margin-bottom:20px;">Why This Community Is Important for Authors</h3>
+                    <div class="importance-grid">
+                        <div class="imp-card">
+                            <h4>1. Accurate Book Listings & Editions</h4>
+                            <p>Librarians add missing books, update cover art, fix broken ISBNs, and merge duplicate editions so all your reader ratings and reviews stay combined in one place.</p>
+                        </div>
+                        <div class="imp-card">
+                            <h4>2. Proper Series & Author Attribution</h4>
+                            <p>If your book is part of a series or attached to the wrong author profile with a similar name, the Librarians Group ensures readers find your exact catalog cleanly.</p>
+                        </div>
+                        <div class="imp-card">
+                            <h4>3. Stronger Reader Trust & Discovery</h4>
+                            <p>When readers click on a book link and see complete descriptions, accurate page counts, and up-to-date editions, they are far more likely to add your book to their "Want to Read" shelf.</p>
+                        </div>
+                    </div>
+
+                    <!-- Direct Group Link -->
+                    <div class="gr-link-bar">
+                        <p>Need to request a book update or explore the community directly?</p>
+                        <a href="https://www.goodreads.com/group/show/220-goodreads-librarians-group" target="_blank" rel="noopener noreferrer" class="btn-primary">Go to the Goodreads Librarians Group ↗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paid Author Feature Page Offer -->
+        <section id="author-feature" class="offer-section">
+            <div class="container">
+                <div class="offer-card">
+                    <div>
+                        <span class="badge">Included With Every Month or Standalone</span>
+                        <h2>Your Own Dedicated Author Feature Page</h2>
+                        <p>Once your book listing is ready, give readers and reviewers a dedicated place to discover your story. When you join any month of our 5-Month Reading Challenge—or order standalone after payment—<strong>I will personally build a custom Author Feature Page</strong> tailored specifically to your book and brand.</p>
+                        <ul class="offer-list">
+                            <li>Included automatically in Month 1, Month 2, Month 3, Month 4, and Month 5</li>
+                            <li>Custom-built standalone page highlighting your book cover, blurb, and tropes</li>
+                            <li>Direct buy buttons linking to Amazon, Goodreads, and your preferred stores</li>
+                            <li>Ready-to-share link you can post in reader groups, newsletters, and social media</li>
+                        </ul>
+                    </div>
+
+                    <div class="offer-cta-box">
+                        <h3>Reserve Your Spot Today</h3>
+                        <p>Join any month of our reading challenge or request your custom Author Feature Page directly.</p>
+                        <a onclick="selectAndContact('feature-page')" class="btn-primary" style="width:100%;">Order Your Feature Page</a>
+                        <p style="font-size:0.82rem; color:#6b7280; margin-top:12px; margin-bottom:0;">Built and delivered promptly after payment confirmation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PAGE 2: ABOUT ME PAGE                      -->
+    <!-- ========================================== -->
+    <div id="about-page" class="page-view">
+        <section class="page-header">
+            <div class="container">
+                <h1>About Me & Vivian Sophie's Community</h1>
+                <p>Dedicated to helping authors stand out, keeping book listings accurate, and connecting great stories with passionate readers.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container about-grid">
+                <div class="about-main-card">
+                    <span class="badge">My Story & Mission</span>
+                    <h2>Hi, I'm Vivian Sophie</h2>
+                    <p>I created <strong>Vivian Sophie's Community</strong> with one clear mission: to give authors—both newly published and established—a genuine, structured way to get their books seen, read, and talked about by real readers.</p>
+                    <p>Too many great books get lost simply because authors don't have clean Goodreads listings, a dedicated place to showcase their work, or consistent visibility over time. That is why I combine practical Goodreads Librarians Group guidance, custom-built <strong>Author Feature Pages</strong>, and our flagship <strong>5-Month Reading Challenge</strong>.</p>
+                    <p>When you partner with my community, you aren't just getting a quick link drop. You get a custom Author Feature Page built specifically for your book and ongoing community momentum that helps readers find, trust, and add your story to their reading lists.</p>
+                    <div style="margin-top: 28px; display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a onclick="showPage('pricing')" class="btn-primary">See 5-Month Challenge Prices</a>
+                        <a onclick="showPage('contact')" class="btn-outline" style="padding: 13px 24px;">Work With Me</a>
+                    </div>
+                </div>
+
+                <div class="about-pillars">
+                    <div class="pillar-card">
+                        <h3>1. Reader-First Promotion</h3>
+                        <p>I focus on placing your book in front of active readers who love discovering new authors and tracking their reading goals.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h3>2. Custom Author Branding</h3>
+                        <p>Every participating author receives a personalized Author Feature Page designed to present their book professionally across every platform.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h3>3. Clean Catalog Standards</h3>
+                        <p>By championing the Goodreads Librarians Group, I help ensure your editions, covers, and author profile look polished and trustworthy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PAGE 3: PRICE LIST PAGE                    -->
+    <!-- ========================================== -->
+    <div id="pricing-page" class="page-view">
+        <section class="page-header">
+            <div class="container">
+                <h1>5-Month Reading Challenge Price List</h1>
+                <p>Every monthly tier includes a custom-built Author Feature Page plus dedicated community promotion. Choose the month and level of momentum that fits your goals.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="pricing-grid">
+
+                    <!-- Month 1: $200 -->
+                    <div class="price-card">
+                        <div>
+                            <div class="month-label">Month 1 — Foundation & Entry</div>
+                            <div class="price-amount">$200 <span>/ Month 1</span></div>
+                            <div class="importance-box">
+                                <strong>Why Month 1 Is Important</strong>
+                                <p>Every successful campaign starts with visibility. Month 1 introduces your book to our community readers, plants your title onto initial TBR ("To Be Read") lists, and gives you a professional landing page to share anywhere.</p>
+                            </div>
+                            <ul class="price-features">
+                                <li class="highlight-feature">Includes a custom-built Author Feature Page</li>
+                                <li>Official entry into Month 1 of the 5-Month Reading Challenge</li>
+                                <li>Book cover, blurb, and buy-link spotlight post</li>
+                                <li>Inclusion in the Month 1 community reading checklist</li>
+                            </ul>
+                        </div>
+                        <a onclick="selectAndContact('month-1')" class="btn-outline">Select Month 1 ($200)</a>
+                    </div>
+
+                    <!-- Month 2: $400 -->
+                    <div class="price-card">
+                        <div>
+                            <div class="month-label">Month 2 — Momentum & Repetition</div>
+                            <div class="price-amount">$400 <span>/ Month 2</span></div>
+                            <div class="importance-box">
+                                <strong>Why Month 2 Is Important</strong>
+                                <p>Readers rarely buy the first time they see a cover. Month 2 reinforces recognition through repeated community exposure, moving hesitant browsers from "interested" to actively picking up your book.</p>
+                            </div>
+                            <ul class="price-features">
+                                <li class="highlight-feature">Includes a custom-built Author Feature Page</li>
+                                <li>Expanded Month 2 placement in reading challenge prompts</li>
+                                <li>Genre & trope-specific recommendation thread features</li>
+                                <li>Mid-month reader check-in and discussion boost</li>
+                            </ul>
+                        </div>
+                        <a onclick="selectAndContact('month-2')" class="btn-outline">Select Month 2 ($400)</a>
+                    </div>
+
+                    <!-- Month 3: $800 -->
+                    <div class="price-card featured-tier">
+                        <span class="tier-badge">Most Popular Mid-Point</span>
+                        <div>
+                            <div class="month-label">Month 3 — Authority & Word-of-Mouth</div>
+                            <div class="price-amount">$800 <span>/ Month 3</span></div>
+                            <div class="importance-box">
+                                <strong>Why Month 3 Is Important</strong>
+                                <p>Month 3 is the tipping point where early challenge readers finish your book and begin talking about it. Investing here fuels organic word-of-mouth buzz, social proof, and stronger reader-to-reader recommendations.</p>
+                            </div>
+                            <ul class="price-features">
+                                <li class="highlight-feature">Includes a custom-built Author Feature Page</li>
+                                <li>Priority spotlight placement during peak challenge engagement</li>
+                                <li>Interactive Author Q&A or excerpt discussion thread</li>
+                                <li>Dedicated review-encouragement and quote-sharing push</li>
+                            </ul>
+                        </div>
+                        <a onclick="selectAndContact('month-3')" class="btn-primary" style="width:100%;">Select Month 3 ($800)</a>
+                    </div>
+
+                    <!-- Month 4: $1,600 -->
+                    <div class="price-card">
+                        <div>
+                            <div class="month-label">Month 4 — High-Impact Expansion</div>
+                            <div class="price-amount">$1,600 <span>/ Month 4</span></div>
+                            <div class="importance-box">
+                                <strong>Why Month 4 Is Important</strong>
+                                <p>By Month 4, your book has established community credibility. This tier scales your reach across wider reader segments, captures binge-readers looking for series starters, and builds strong pre-finale urgency.</p>
+                            </div>
+                            <ul class="price-features">
+                                <li class="highlight-feature">Includes a custom-built Author Feature Page</li>
+                                <li>Top-tier featured banner placement across community announcements</li>
+                                <li>Multi-week dedicated promotional spotlights & reader polls</li>
+                                <li>Expanded genre-wide spotlight across reader threads</li>
+                            </ul>
+                        </div>
+                        <a onclick="selectAndContact('month-4')" class="btn-outline">Select Month 4 ($1,600)</a>
+                    </div>
+
+                    <!-- Month 5: $3,200 -->
+                    <div class="price-card">
+                        <div>
+                            <div class="month-label">Month 5 — Grand Finale & VIP Headliner</div>
+                            <div class="price-amount">$3,200 <span>/ Month 5</span></div>
+                            <div class="importance-box">
+                                <strong>Why Month 5 Is Important</strong>
+                                <p>Month 5 is the grand finale of the challenge when reader excitement, wrap-up lists, and final reading sprints peak. Headlining this stage cements your book as a signature community favorite for lasting sales and backlist growth.</p>
+                            </div>
+                            <ul class="price-features">
+                                <li class="highlight-feature">Includes a custom-built Author Feature Page</li>
+                                <li>Premier VIP Headliner status for the entire Month 5 finale</li>
+                                <li>Maximum community-wide visibility, wrap-up features & top billing</li>
+                                <li>Full campaign priority & end-of-challenge showcase</li>
+                            </ul>
+                        </div>
+                        <a onclick="selectAndContact('month-5')" class="btn-outline">Select Month 5 ($3,200)</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PAGE 4: CONTACT PAGE                       -->
+    <!-- ========================================== -->
+    <div id="contact-page" class="page-view">
+        <section class="page-header">
+            <div class="container">
+                <h1>Get in Touch With Vivian Sophie's Community</h1>
+                <p>Ready to join the 5-Month Reading Challenge, claim your included Author Feature Page, or ask a question? Send a message below.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container contact-grid">
+                <!-- Left Column: Direct Details -->
+                <div class="info-card">
+                    <h2>Direct Contact & Links</h2>
+                    <p>Reach out anytime to reserve your spot in the 5-Month Reading Challenge or request your custom Author Feature Page.</p>
+
+                    <div class="detail-item">
+                        <strong>Email Us Directly</strong>
+                        <a href="mailto:hello@viviansophiescommunity.com">hello@viviansophiescommunity.com</a>
+                    </div>
+
+                    <div class="detail-item">
+                        <strong>5-Month Reading Challenge</strong>
+                        <span>Month 1 ($200) to Month 5 ($3,200) — Every month includes an Author Feature Page</span>
+                    </div>
+
+                    <div class="detail-item">
+                        <strong>Author Feature Page Turnaround</strong>
+                        <span>Custom-built promptly after payment confirmation</span>
+                    </div>
+
+                    <div class="detail-item">
+                        <strong>Goodreads Community</strong>
+                        <a href="https://www.goodreads.com/group/show/220-goodreads-librarians-group" target="_blank" rel="noopener noreferrer">Open Goodreads Librarians Group ↗</a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Contact & Order Inquiry Form -->
+                <div class="form-card">
+                    <h2>Send a Message or Reserve Your Spot</h2>
+                    <p class="sub">Fill out your details below and we will reply with payment instructions and next steps.</p>
+
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Author Name / Pen Name *</label>
+                            <input type="text" id="name" required placeholder="e.g., Vivian Sophie">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required placeholder="author@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="topic">Select Service or Challenge Month *</label>
+                            <select id="topic">
+                                <option value="month-1">5-Month Challenge — Month 1 ($200 + Author Feature Page)</option>
+                                <option value="month-2">5-Month Challenge — Month 2 ($400 + Author Feature Page)</option>
+                                <option value="month-3">5-Month Challenge — Month 3 ($800 + Author Feature Page)</option>
+                                <option value="month-4">5-Month Challenge — Month 4 ($1,600 + Author Feature Page)</option>
+                                <option value="month-5">5-Month Challenge — Month 5 ($3,200 + Author Feature Page)</option>
+                                <option value="feature-page">Standalone Custom Author Feature Page</option>
+                                <option value="goodreads-help">Question About Goodreads Librarians Group</option>
+                                <option value="general">General Community Inquiry</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookUrl">Book Title or Goodreads / Amazon Link</label>
+                            <input type="text" id="bookUrl" placeholder="Paste your book link or title here">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" required placeholder="Tell us about your book, which challenge month(s) you'd like to join, or details for your Author Feature Page..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
+                        <div id="form-status">Thank you! Your message has been sent to Vivian Sophie's Community.</div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Shared Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Vivian Sophie's Community. All rights reserved. | <a onclick="showPage('home')">Home</a> &bull; <a onclick="showPage('about')">About Me</a> &bull; <a onclick="showPage('pricing')">Price List</a> &bull; <a onclick="showPage('contact')">Contact</a> &bull; <a href="https://www.goodreads.com/group/show/220-goodreads-librarians-group" target="_blank" rel="noopener noreferrer">Goodreads Librarians Group</a></p>
+        </div>
+    </footer>
+
+    <!-- Page Switcher & Form Script -->
+    <script>
+        function showPage(pageName) {
+            document.getElementById('home-page').classList.remove('active-page');
+            document.getElementById('about-page').classList.remove('active-page');
+            document.getElementById('pricing-page').classList.remove('active-page');
+            document.getElementById('contact-page').classList.remove('active-page');
+
+            document.getElementById('nav-home').classList.remove('active');
+            document.getElementById('nav-about').classList.remove('active');
+            document.getElementById('nav-pricing').classList.remove('active');
+            document.getElementById('nav-contact').classList.remove('active');
+
+            if (pageName === 'about') {
+                document.getElementById('about-page').classList.add('active-page');
+                document.getElementById('nav-about').classList.add('active');
+            } else if (pageName === 'pricing') {
+                document.getElementById('pricing-page').classList.add('active-page');
+                document.getElementById('nav-pricing').classList.add('active');
+            } else if (pageName === 'contact') {
+                document.getElementById('contact-page').classList.add('active-page');
+                document.getElementById('nav-contact').classList.add('active');
+            } else {
+                document.getElementById('home-page').classList.add('active-page');
+                document.getElementById('nav-home').classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectAndContact(optionValue) {
+            document.getElementById('topic').value = optionValue;
+            showPage('contact');
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('form-status').style.display = 'block';
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>
