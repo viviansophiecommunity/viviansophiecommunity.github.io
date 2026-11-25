@@ -1019,3 +1019,39 @@
 
 </body>
 </html>
+<div data-fs-success></div>
+<div data-fs-error></div>
+
+<form id="contactForm">
+  <label for="authorName">Author Name</label>
+  <input type="text" id="authorName" name="author_name" data-fs-field required />
+  <span data-fs-error="author_name"></span>
+
+  <label for="email">Email Address</label>
+  <input type="email" id="email" name="email" data-fs-field required />
+  <span data-fs-error="email"></span>
+
+  <label for="serviceTier">Service / Challenge Tier</label>
+  <select id="serviceTier" name="service_tier" data-fs-field>
+    <option value="5-Month Reading Challenge ($200-$3,200)">5-Month Reading Challenge ($200–$3,200)</option>
+    <option value="Author Feature Page">Author Feature Page (Included in Challenge Tiers)</option>
+    <option value="Goodreads Librarians Group Guidance">Goodreads Librarians Group Guidance</option>
+  </select>
+  <span data-fs-error="service_tier"></span>
+
+  <label for="bookLink">Book Link or Title</label>
+  <input type="text" id="bookLink" name="book_link" data-fs-field />
+  <span data-fs-error="book_link"></span>
+
+  <label for="message">Project Details / Message</label>
+  <textarea id="message" name="message" rows="5" data-fs-field required></textarea>
+  <span data-fs-error="message"></span>
+
+  <button type="submit" data-fs-submit-btn>Send Inquiry</button>
+</form>
+
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contactForm', formId: 'xdegbdpw' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
